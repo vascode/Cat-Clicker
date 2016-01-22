@@ -1,10 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 <head>
-	<meta charset="UTF-8">
+	<meta charset='UTF-8'>
 	<title>Cat Clicker</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'> -->
+  	<!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> -->
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script src='https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js'></script>
+	<!-- // <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script> -->
 </head>
 <style>
 #list {
@@ -12,18 +17,22 @@
 	/*padding-left: 50px;*/
 }
 
+.btn {
+	margin: 20px auto auto 20px;
+}
 </style>
 
 <body>
-	<div class="row">
-		<div class="col-md-2 col-sm-12" id="list"></div>
-		<!-- <ul id='list'></ul> -->
-		<div class="col-md-10 col-sm-12" id="display">
-			<!-- <h2 id="catName"></h2>
-			<img id="catImage" src="" alt="">
-			<p id="catCount"></p>  -->
+	<button type="button" class="btn btn-default" id="adminButton">Admin</button>
+	<div class='row'>
+
+		<div class='col-md-2 col-sm-12' id='list'></div>
+		<div class='col-md-10 col-sm-12' id='imgArea'>
+			<div class='col-md-4 col-sm-12' id='display'></div>
+			<div class='col-md-8 col-sm-12' id='adminArea'></div>
 		</div>
 	</div>
-	<script src="js/CatClicker(MOV).js"></script>
+
+	<script src='js/CatClicker(MOV).js'></script>
 </body>
 </html>

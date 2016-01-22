@@ -72,7 +72,15 @@ var octopus = {
 var catlistView = {
 	init: function(){
 		//1. assign DOM elemnt to variable
-		this.catListElem = document.getElementById('list');
+		//2. event handler for admin button
+
+		// this.catListElem = document.getElementById('list');
+		this.catListElem = $('#list')[0];
+		// this.adminButton = document.getElementById('')
+		$('#adminButton').click(function(){
+			$('#adminArea').append('hi');
+
+		});
 
 		//render the view. update element with corresponding values
 		this.render();
@@ -119,14 +127,14 @@ var catView = {
 
 			//append cat image to #display
 			$("#display").append('<div id="' + pCat.name + '_div">' + pCat.name + '<br><img id="' + pCat.name + '"src="' + pCat.imgSrc +'" alt="' + pCat.name +
-				'" style="width:100px;height:100;margin-left:1.5em"><p id="num' + (pIndex+1) + '">The number of Clicks : ' + pCat.numOfClick + '</p></div><br>' ) ;
+				'" style="width:100px;height:100;margin-left:1.5em"><p id="num' + (pIndex+1) + '">The number of Clicks : ' + pCat.numOfClick + '</p></div>' ) ;
 
 					// bind click event on image to increment counter by 1
 			$('#' + pCat.name).click(function(){
 				// console.log(catNameCopy + 'pic clicked');
 				// pCat.numOfClick += 1;
 				var plusedClick = octopus.incrementCounter(pIndex);
-				console.log(plusedClick);
+				// console.log(plusedClick);
 
 				$('#num' + (pIndex+1)).html ('The number of Clicks : ' + plusedClick);
 			});
