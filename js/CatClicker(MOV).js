@@ -52,12 +52,20 @@ var octopus = {
 	//3. incrementCounter -> increase number of Click counter and return that value (to catView so that i can update that # of Clicks)
 
 	init: function(){
-		model.init();
 		catlistView.init();
+		adminView.init();
 	},
 
 	getAllCats: function(){
 		return model.cats;
+	},
+
+	setClickForCat: function(pIndex, pNum){
+		model.cats[pIndex].numOfClick = pNum;
+	},
+
+	setImgSrcForCat: function(pIndex, pImgSrc){
+		model.cats[pIndex].imgSrc = pImgSrc;
 	},
 
 	incrementCounter: function(pIndex){
@@ -76,11 +84,7 @@ var catlistView = {
 
 		// this.catListElem = document.getElementById('list');
 		this.catListElem = $('#list')[0];
-		// this.adminButton = document.getElementById('')
-		$('#adminButton').click(function(){
-			$('#adminArea').append('hi');
 
-		});
 
 		//render the view. update element with corresponding values
 		this.render();
@@ -108,6 +112,7 @@ var catlistView = {
 				};
 			})(i, cat));
 		};
+
 	}//end of render
 };
 
@@ -121,9 +126,9 @@ var catView = {
 		//1-2 if it is not checked, remove div for cat image on #display
 		//2. click cat image -> increment numOfClick via octopus
 
-		if($('#' + pCat.name + '_list').hasClass("checked") == false){ //when box was unchecked -> checked
+		if($('#' + pCat.name + '_list').hasClass('checked') == false){ //when box was unchecked -> checked
 			//indicate box checked in list
-			$('#' + pCat.name + '_list').addClass("checked");
+			$('#' + pCat.name + '_list').addClass('checked');
 
 			//append cat image to #display
 			$("#display").append('<div id="' + pCat.name + '_div">' + pCat.name + '<br><img id="' + pCat.name + '"src="' + pCat.imgSrc +'" alt="' + pCat.name +
@@ -149,8 +154,95 @@ var catView = {
 	}
 };
 
+var adminView = {
+	init: function(){
+		//bind event to handler (click admin button -> show admin area next to #display)
 
-catlistView.init();
+		// this.adminButton = document.getElementById('')
+
+		this.render();
+
+		//TODO: admin area can show only checked images
+		// var checkedElem = $('.checked')
+		// console.log(checkedElem[0]);
+		// console.log(checkedElem.length);
+		// $('#adminArea').append('<span>');
+
+		// for (var i=0; i<NUM_OF_IMG; i++){
+		// 	cat = cats[i];
+		// 	catView.render(i, cat);
+		// }
+
+
+	},
+
+	render: function(){
+		$('#adminButton').click(function(){
+			if ($('#adminButton').hasClass('pushed') == false){
+				$('#adminButton').addClass('pushed');
+
+				var cats = octopus.getAllCats();
+				var cat;
+
+				$('#adminArea').append('<p>=== Setting for # of clicks ===</p>');
+
+				for (var i=0; i<cats.length; i++){
+					cat = cats[i];
+
+					$('#adminArea').append('<form>' + cat.name + ': = <input type="text" id="' + cat.name
+						+ '_numOfClick" value="' + cat.numOfClick+ '"></form><br>');
+				}
+
+				$('#adminArea').append('<p>=== Setting for image URL  ===</p>');
+
+				for (var i=0; i<cats.length; i++){
+					cat = cats[i];
+
+					$('#adminArea').append('<form>' + cat.name + ': = <input type="text" id="' + cat.name
+						+ '_imgSrc" value="' + cat.imgSrc+ '"></form><br>');
+				}
+				$('#adminArea').append('<br><button type="button" class="btn btn-default" id="cancelButton">Cancel</button> ');
+				$('#adminArea').append(' <button type="button" class="btn btn-default" id="saveButton">Save</button>');
+
+				$('#cancelButton').click(function(){
+					$('#adminArea').empty();
+					$('#adminButton').removeClass('pushed');
+				})
+
+				$('#saveButton').click(function(){
+
+					// $('#display').empty();
+					$('#display').html();
+					document.getElementById('display').innerHTML = '';
+
+					//update values in input to data in model
+					for (var i=0; i<cats.length; i++){
+						cat = cats[i];
+						octopus.setClickForCat(i, parseInt($('#' + cat.name + '_numOfClick').val()));
+						octopus.setImgSrcForCat(i, $('#' + cat.name + '_imgSrc').val());
+
+						//updpate image with counter and imgSrc
+
+						$('#' + cat.name + '_list').toggleClass('checked');
+						catView.render(i, cat);
+					};
+					//remove admin area
+					$('#adminButton').removeClass('pushed');
+					$('#adminArea').empty();
+				});
+			}
+
+
+
+
+		});//end of $('#adminButton').click(function(){
+
+	}
+
+};
+
+
+octopus.init();
 
 
 

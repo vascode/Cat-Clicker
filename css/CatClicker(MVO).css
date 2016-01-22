@@ -1,0 +1,12 @@
+#list {
+	padding: 50px 10px 10px 50px;
+	/*padding-left: 50px;*/
+}
+
+#adminButton {
+	margin: 20px auto auto 30px;
+}
+
+#cancelButton {
+	margin: auto auto auto 100px;
+}
